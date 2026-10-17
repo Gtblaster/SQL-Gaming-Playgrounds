@@ -1,0 +1,50 @@
+{
+  "id": "w2c9",
+  "world": 2,
+  "case": 9,
+  "title": "Boss Case: The SHADOW42 Trail",
+  "subtitle": "Combine everything you know to unmask the mastermind",
+  "estimatedMinutes": 10,
+  "minigameType": "sql_interrogation",
+  "xpReward": 400,
+  "bonusXP": 150,
+  "badgeUnlock": "sql_graduate",
+  "skillsIntroduced": ["complex_queries", "combining_skills"],
+  "conceptSummary": "Real detective work combines SELECT, WHERE, GROUP BY, HAVING, ORDER BY, and LIMIT together in one query.",
+  "dataset": "ecommerce",
+  "schema": {
+    "products": ["product_id", "name", "category", "brand", "price", "stock", "rating"],
+    "customers": ["customer_id", "name", "email", "city", "state", "total_orders", "loyalty_tier"],
+    "transactions": ["txn_id", "customer_id", "product_id", "quantity", "unit_price", "total_amount", "txn_date", "payment_method", "discount_pct", "status"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "This is it, Detective. All clues point to one customer who has been gaming our systems across multiple databases.", "mood": "tense" },
+    { "character": "chief", "text": "Find the customer with the most transactions, all completed, sorted by total spending. The top result is your suspect.", "mood": "intense" },
+    { "character": "byte", "text": "You'll need GROUP BY, COUNT, SUM, HAVING, and ORDER BY. Everything from World 2. This is the final exam.", "mood": "encouraging" }
+  ],
+  "teachMoment": {
+    "title": "Putting It All Together",
+    "body": "A complex query might look like this:\n\nSELECT customer_id,\n       COUNT(*) AS num_orders,\n       SUM(total_amount) AS total_spent\nFROM transactions\nWHERE status = 'completed'\nGROUP BY customer_id\nHAVING COUNT(*) >= 3\nORDER BY total_spent DESC\nLIMIT 5\n\nEvery clause has a job. Together, they answer complex business questions.",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Find the top 3 customers by total amount spent on completed transactions. Show customer_id, number of orders (as num_orders), and total_spent. Only include customers with 3 or more orders.",
+    "startingQuery": "SELECT customer_id,\n       COUNT(*) AS num_orders,\n       SUM(total_amount) AS total_spent\nFROM transactions\nWHERE \nGROUP BY \nHAVING \nORDER BY total_spent DESC\nLIMIT 3",
+    "solution": "SELECT customer_id, COUNT(*) AS num_orders, SUM(total_amount) AS total_spent FROM transactions WHERE status = 'completed' GROUP BY customer_id HAVING COUNT(*) >= 3 ORDER BY total_spent DESC LIMIT 3",
+    "validationMode": "result_match",
+    "successCondition": { "rowCount": 3 }
+  },
+  "hints": [
+    { "level": 1, "text": "Fill in WHERE (status = 'completed'), GROUP BY (customer_id), and HAVING (COUNT(*) >= 3).", "xpCost": 0 },
+    { "level": 2, "text": "WHERE status = 'completed' | GROUP BY customer_id | HAVING COUNT(*) >= 3", "xpCost": 15 },
+    { "level": 3, "text": "SELECT customer_id, COUNT(*) AS num_orders, SUM(total_amount) AS total_spent FROM transactions WHERE status = 'completed' GROUP BY customer_id HAVING COUNT(*) >= 3 ORDER BY total_spent DESC LIMIT 3", "xpCost": 25 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Customer 206 — Farida Shaikh from Hyderabad! 15 total orders, highest lifetime spend. Cross-reference with SHADOW42 pizza orders: she's the connection!", "mood": "triumphant" },
+    { "character": "chief", "text": "Farida Shaikh. Gold loyalty member. Biggest spender. All those manipulated records trace back to her employee access credentials.", "mood": "satisfied" },
+    { "character": "byte", "text": "But she claims she was hacked. To prove it, we need to look at JOIN data from multiple tables. World 3 is calling...", "mood": "intrigued" }
+  ],
+  "storyBeat": "CASE CRACKED — partially. Farida Shaikh's credentials were used. But was she the mastermind or a victim? The truth lies in JOIN queries across multiple tables. The real villain is still out there. World 3: The Join District awaits.",
+  "nextCase": "w3c1",
+  "unlocksWorld": 3
+}

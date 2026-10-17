@@ -1,0 +1,55 @@
+{
+  "id": "w3c2",
+  "world": 3,
+  "case": 2,
+  "title": "The Missing Link",
+  "subtitle": "Find customers with no orders — ghost accounts!",
+  "estimatedMinutes": 8,
+  "minigameType": "join_puzzle",
+  "xpReward": 220,
+  "bonusXP": 60,
+  "badgeUnlock": "join_master",
+  "skillsIntroduced": ["left_join", "null_check"],
+  "conceptSummary": "LEFT JOIN keeps ALL rows from the left table, even if there's no match in the right table (those get NULL).",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"],
+    "customers": ["customer_id", "name", "city", "phone", "joined_date"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "We need to find customers who are in our database but have NEVER placed an order. Those 'ghost' accounts might have been created to steal discount codes!", "mood": "detective" },
+    { "character": "chief", "text": "LEFT JOIN keeps every customer, even ones with no orders. Their order columns will be NULL. Filter for NULL order_id.", "mood": "teaching" }
+  ],
+  "teachMoment": {
+    "title": "LEFT JOIN: Keep All From Left",
+    "body": "LEFT JOIN keeps all rows from the LEFT table:\n\nSELECT c.name, o.order_id\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_id IS NULL\n\nCustomers with no orders get NULL in order columns.\nFilter with IS NULL to find the unmatched ones!",
+    "animated": true,
+    "diagram": "left_join"
+  },
+  "task": {
+    "instruction": "Find all customers who have NEVER placed an order. Use LEFT JOIN and filter for NULL order_id.",
+    "startingQuery": "SELECT c.name, c.city, o.order_id\nFROM customers c\nLEFT JOIN orders o ON c.customer_id = o.customer_id\nWHERE o.order_id IS NULL",
+    "solution": "SELECT c.name, c.city, o.order_id FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL",
+    "validationMode": "result_match",
+    "joinPuzzle": {
+      "table1": "customers",
+      "table2": "orders",
+      "joinKey1": "customer_id",
+      "joinKey2": "customer_id",
+      "joinType": "LEFT"
+    },
+    "successCondition": { "minRows": 0 }
+  },
+  "hints": [
+    { "level": 1, "text": "Use LEFT JOIN so all customers appear. Then WHERE o.order_id IS NULL finds the ones with no match.", "xpCost": 0 },
+    { "level": 2, "text": "FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL", "xpCost": 10 },
+    { "level": 3, "text": "SELECT c.name, c.city, o.order_id FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Interesting... all customers have orders in this cleaned dataset. But in the raw logs, there were ghost accounts that have since been deleted. Someone covered their tracks!", "mood": "concerned" },
+    { "character": "chief", "text": "The data was cleaned. By the mastermind. That means we need World 4 — the Cleanup Crew — to detect what was erased.", "mood": "resolved" }
+  ],
+  "storyBeat": "Someone cleaned the database to remove ghost accounts. The act of cleaning is itself evidence. In World 4, you'll learn to detect data manipulation through patterns in 'cleaned' data.",
+  "nextCase": "w4c1",
+  "unlocksWorld": 4
+}

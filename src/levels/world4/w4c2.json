@@ -1,0 +1,46 @@
+{
+  "id": "w4c2",
+  "world": 4,
+  "case": 2,
+  "title": "The Typo Tornado",
+  "subtitle": "City names are a mess. Clean them up!",
+  "estimatedMinutes": 8,
+  "minigameType": "data_cleanup_rush",
+  "xpReward": 230,
+  "bonusXP": 70,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["string_functions", "trim", "upper", "lower", "replace"],
+  "conceptSummary": "SQL string functions: TRIM() removes spaces, UPPER()/LOWER() standardize case, REPLACE() fixes text.",
+  "dataset": "ecommerce",
+  "schema": {
+    "customers": ["customer_id", "name", "email", "city", "state", "total_orders", "loyalty_tier"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "The e-commerce customer data has city names like 'mumbai', 'MUMBAI', ' Mumbai ' with spaces. It's chaos! GROUP BY won't work if the values differ.", "mood": "exasperated" },
+    { "character": "chief", "text": "UPPER() and TRIM(). Standardize the data. A good detective cleans the scene before drawing conclusions.", "mood": "methodical" }
+  ],
+  "teachMoment": {
+    "title": "String Cleaning Functions",
+    "body": "Clean up text with:\n• UPPER(city) → 'MUMBAI' (all caps)\n• LOWER(city) → 'mumbai' (all lowercase)\n• TRIM(city) → removes spaces from both ends\n• REPLACE(name, 'old', 'new') → substitutes text\n\nExample:\nSELECT TRIM(UPPER(city)) AS clean_city FROM customers",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Select customer name and city, but standardize city to UPPERCASE and TRIM any spaces. Sort by clean_city.",
+    "startingQuery": "SELECT name, TRIM(UPPER(city)) AS clean_city\nFROM customers\nORDER BY clean_city",
+    "solution": "SELECT name, TRIM(UPPER(city)) AS clean_city FROM customers ORDER BY clean_city",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 5 }
+  },
+  "hints": [
+    { "level": 1, "text": "Wrap the city column: TRIM(UPPER(city)) AS clean_city", "xpCost": 0 },
+    { "level": 2, "text": "SELECT name, TRIM(UPPER(city)) AS clean_city FROM customers ORDER BY clean_city", "xpCost": 10 },
+    { "level": 3, "text": "SELECT name, TRIM(UPPER(city)) AS clean_city FROM customers ORDER BY clean_city", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Clean data! Now GROUP BY city works perfectly. And I notice all SHADOW42 customers are from the same 3 cities.", "mood": "alert" },
+    { "character": "chief", "text": "Geographic clustering. This wasn't random fraud. It was a coordinated regional operation. Insight City will help us prove it.", "mood": "confident" }
+  ],
+  "storyBeat": "Clean data reveals geographic patterns invisible in dirty data. The fraud is clustered. World 5: Insight City will help visualize and statistically prove this network's scope.",
+  "nextCase": "w5c1",
+  "unlocksWorld": 5
+}

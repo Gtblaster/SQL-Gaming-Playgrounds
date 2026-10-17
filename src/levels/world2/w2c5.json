@@ -1,0 +1,46 @@
+{
+  "id": "w2c5",
+  "world": 2,
+  "case": 5,
+  "title": "HAVING a Bad Day",
+  "subtitle": "Fix the broken query that's supposed to catch cheaters",
+  "estimatedMinutes": 7,
+  "minigameType": "bug_hunt",
+  "xpReward": 180,
+  "bonusXP": 50,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["having", "where_vs_having"],
+  "conceptSummary": "HAVING filters GROUPS (after GROUP BY). WHERE filters ROWS (before grouping). They're not interchangeable!",
+  "dataset": "cricket_league",
+  "schema": {
+    "match_stats": ["stat_id", "player_id", "match_id", "season", "runs_scored", "balls_faced", "wickets_taken", "overs_bowled", "catches"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "I tried to find all players with total runs over 100, but my query crashed! It says WHERE can't use aggregate functions.", "mood": "confused" },
+    { "character": "chief", "text": "Because WHERE runs BEFORE grouping. You need HAVING — it filters AFTER the group is computed.", "mood": "explaining" }
+  ],
+  "teachMoment": {
+    "title": "HAVING vs WHERE",
+    "body": "ORDER OF OPERATIONS:\n1. FROM (get the table)\n2. WHERE (filter rows)\n3. GROUP BY (group them)\n4. HAVING (filter groups)\n5. SELECT (pick columns)\n6. ORDER BY (sort)\n7. LIMIT (cut)\n\n❌ WHERE SUM(runs_scored) > 100 — WRONG\n✅ HAVING SUM(runs_scored) > 100 — CORRECT",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Fix Byte's broken query. It should find all players with total runs OVER 100.",
+    "brokenQuery": "SELECT player_id, SUM(runs_scored) AS total_runs\nFROM match_stats\nGROUP BY player_id\nWHERE SUM(runs_scored) > 100",
+    "solution": "SELECT player_id, SUM(runs_scored) AS total_runs FROM match_stats GROUP BY player_id HAVING SUM(runs_scored) > 100",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 1 },
+    "errorInQuery": "WHERE used instead of HAVING for aggregate filter"
+  },
+  "hints": [
+    { "level": 1, "text": "The issue is WHERE is in the wrong place. It can't filter aggregated values.", "xpCost": 0 },
+    { "level": 2, "text": "Replace WHERE with HAVING. HAVING goes AFTER GROUP BY.", "xpCost": 10 },
+    { "level": 3, "text": "Fix: change WHERE to HAVING, keeping it after GROUP BY: HAVING SUM(runs_scored) > 100", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Player 1 is the only one over 100 total runs. Conclusive proof of stat manipulation!", "mood": "triumphant" },
+    { "character": "chief", "text": "Good work. Now we need to find DISTINCT players and discount codes involved. No duplicates.", "mood": "determined" }
+  ],
+  "storyBeat": "The data clearly shows stat manipulation targeting Player 1. But who entered these records? We need to find all unique discount codes and user IDs from the logs.",
+  "nextCase": "w2c6"
+}

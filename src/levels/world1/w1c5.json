@@ -1,0 +1,49 @@
+{
+  "id": "w1c5",
+  "world": 1,
+  "case": 5,
+  "title": "Sorted Suspects",
+  "subtitle": "The cricket league needs its scoreboard sorted",
+  "estimatedMinutes": 5,
+  "minigameType": "sql_interrogation",
+  "xpReward": 130,
+  "bonusXP": 30,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["order_by", "asc_desc"],
+  "conceptSummary": "ORDER BY sorts your results. Add DESC for highest-first, ASC (default) for lowest-first.",
+  "dataset": "cricket_league",
+  "schema": {
+    "players": ["player_id", "name", "team_id", "role", "country", "age"],
+    "match_stats": ["stat_id", "player_id", "match_id", "season", "runs_scored", "balls_faced", "wickets_taken", "overs_bowled", "catches"],
+    "teams": ["team_id", "team_name", "city", "captain", "founded_year"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "The Cricket League commissioner wants to know who scored the most runs. The data is all jumbled!", "mood": "frantic" },
+    { "character": "chief", "text": "Use ORDER BY. Sort by runs, highest to lowest. Simple.", "mood": "bored" },
+    { "character": "player", "text": "Let's find the top scorers and see if anything in the stats looks... fixed.", "mood": "suspicious" }
+  ],
+  "teachMoment": {
+    "title": "Sorting Results with ORDER BY",
+    "body": "ORDER BY sorts your results:\n\nSELECT name, runs_scored FROM match_stats ORDER BY runs_scored DESC\n\n• DESC = Descending (highest first — 100, 90, 80...)\n• ASC = Ascending (lowest first — 10, 20, 30...)\n• Default is ASC if you don't specify",
+    "animated": true,
+    "diagram": "order_by"
+  },
+  "task": {
+    "instruction": "Find all match stats and sort by runs_scored from HIGHEST to LOWEST. Show player_id, match_id, and runs_scored.",
+    "startingQuery": "SELECT player_id, match_id, runs_scored\nFROM match_stats\nORDER BY ",
+    "solution": "SELECT player_id, match_id, runs_scored FROM match_stats ORDER BY runs_scored DESC",
+    "validationMode": "order_check",
+    "successCondition": { "minRows": 10, "orderedBy": "runs_scored", "direction": "DESC" }
+  },
+  "hints": [
+    { "level": 1, "text": "You need ORDER BY after the table name. What column should be sorted?", "xpCost": 0 },
+    { "level": 2, "text": "Highest to lowest = DESC. So: ORDER BY runs_scored DESC", "xpCost": 10 },
+    { "level": 3, "text": "Full: SELECT player_id, match_id, runs_scored FROM match_stats ORDER BY runs_scored DESC", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Player 14 — Jake Williams — scored a suspiciously high 112 runs as a BOWLER. That's almost impossible!", "mood": "shocked" },
+    { "character": "chief", "text": "Someone doctored those match stats. And if they're messing with cricket, they're messing with betting data too.", "mood": "angry" }
+  ],
+  "storyBeat": "Match stats have been tampered with. A bowler with 112 runs. The trail leads to a shadowy data manipulation ring. SHADOW42 is more than a pizza discount code.",
+  "nextCase": "w1c6"
+}

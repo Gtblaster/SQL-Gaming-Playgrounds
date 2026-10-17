@@ -1,0 +1,54 @@
+{
+  "id": "w3c1",
+  "world": 3,
+  "case": 1,
+  "title": "Two Tables, One Truth",
+  "subtitle": "Connect the pizza orders to customer names",
+  "estimatedMinutes": 8,
+  "minigameType": "join_puzzle",
+  "xpReward": 200,
+  "bonusXP": 60,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["inner_join", "primary_key", "foreign_key"],
+  "conceptSummary": "INNER JOIN connects two tables on a matching column (key). Only rows with matches in BOTH tables appear.",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"],
+    "customers": ["customer_id", "name", "city", "phone", "joined_date"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Welcome to the Join District! Here, two tables become one. The orders table has customer_id but not the customer's name. The customers table has the name. We need BOTH!", "mood": "excited" },
+    { "character": "chief", "text": "INNER JOIN. Match customer_id in orders to customer_id in customers. Only rows with a matching ID in BOTH tables appear.", "mood": "instructing" }
+  ],
+  "teachMoment": {
+    "title": "INNER JOIN: Connecting Tables",
+    "body": "An INNER JOIN merges two tables on a shared column:\n\nSELECT o.order_id, c.name, o.total_price\nFROM orders o\nINNER JOIN customers c ON o.customer_id = c.customer_id\n\n• o and c are aliases for the table names (shorthand!)\n• ON specifies which columns to match\n• Only rows where customer_id exists in BOTH tables appear",
+    "animated": true,
+    "diagram": "inner_join"
+  },
+  "task": {
+    "instruction": "Join orders and customers to show the customer name, order date, and total price for all orders.",
+    "startingQuery": "SELECT c.name, o.order_date, o.total_price\nFROM orders o\nINNER JOIN customers c ON o.customer_id = c.customer_id",
+    "solution": "SELECT c.name, o.order_date, o.total_price FROM orders o INNER JOIN customers c ON o.customer_id = c.customer_id",
+    "validationMode": "result_match",
+    "joinPuzzle": {
+      "table1": "orders",
+      "table2": "customers",
+      "joinKey1": "customer_id",
+      "joinKey2": "customer_id",
+      "joinType": "INNER"
+    },
+    "successCondition": { "minRows": 15, "requiredColumns": ["name", "order_date", "total_price"] }
+  },
+  "hints": [
+    { "level": 1, "text": "Both tables share customer_id. Use that as the ON condition.", "xpCost": 0 },
+    { "level": 2, "text": "Pattern: FROM orders o INNER JOIN customers c ON o.customer_id = c.customer_id", "xpCost": 10 },
+    { "level": 3, "text": "SELECT c.name, o.order_date, o.total_price FROM orders o INNER JOIN customers c ON o.customer_id = c.customer_id", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Now we can see Priya Sharma's orders directly. No more decoding customer IDs!", "mood": "pleased" },
+    { "character": "chief", "text": "And I see some customers in our database who have ZERO orders. We need a LEFT JOIN for that.", "mood": "observant" }
+  ],
+  "storyBeat": "With joins, we can now see the full picture. A customer exists in the database with no orders — but their credentials were used to place SHADOW42 orders. Ghost account detected!",
+  "nextCase": "w3c2"
+}

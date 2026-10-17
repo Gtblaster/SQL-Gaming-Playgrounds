@@ -1,0 +1,49 @@
+{
+  "id": "w1c4",
+  "world": 1,
+  "case": 4,
+  "title": "The Duplicate Dilemma",
+  "subtitle": "Something in the library records doesn't add up",
+  "estimatedMinutes": 6,
+  "minigameType": "bug_hunt",
+  "xpReward": 140,
+  "bonusXP": 35,
+  "badgeUnlock": "bug_hunter",
+  "skillsIntroduced": ["where_text", "string_comparison"],
+  "conceptSummary": "When filtering TEXT values, always use single quotes: WHERE city = 'Mumbai' (not Mumbai).",
+  "dataset": "library",
+  "schema": {
+    "books": ["book_id", "title", "author", "genre", "year_published", "total_copies", "available_copies"],
+    "members": ["member_id", "name", "email", "membership_type", "joined_date", "city"],
+    "loans": ["loan_id", "book_id", "member_id", "loan_date", "due_date", "return_date", "fine_amount"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "I tried to look up premium members from Bangalore. My query failed. Help!", "mood": "flustered" },
+    { "character": "chief", "text": "You forgot the quotes around the text value. SQL needs quotes for text. Every. Single. Time.", "mood": "grumpy" },
+    { "character": "byte", "text": "Can you fix my broken query? It should find all premium members.", "mood": "hopeful" }
+  ],
+  "teachMoment": {
+    "title": "Text Values Need Quotes!",
+    "body": "When your WHERE condition involves TEXT, wrap the value in single quotes:\n\n✅ WHERE membership_type = 'premium'\n❌ WHERE membership_type = premium\n\nWithout quotes, SQL thinks 'premium' is a column name — and panics.",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Fix Byte's broken query. It should return all 'premium' members.",
+    "brokenQuery": "SELECT name, city, membership_type\nFROM members\nWHERE membership_type = premium",
+    "solution": "SELECT name, city, membership_type FROM members WHERE membership_type = 'premium'",
+    "validationMode": "result_match",
+    "successCondition": { "rowCount": 4 },
+    "errorInQuery": "Missing quotes around premium"
+  },
+  "hints": [
+    { "level": 1, "text": "Look at the WHERE clause. Something is missing around the word premium.", "xpCost": 0 },
+    { "level": 2, "text": "Text values need quotes! Try: WHERE membership_type = 'premium'", "xpCost": 10 },
+    { "level": 3, "text": "Full fix: SELECT name, city, membership_type FROM members WHERE membership_type = 'premium'", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "4 premium members. And one of them — Kavya Rao — has borrowed 3 books at once. That's the maximum!", "mood": "excited" },
+    { "character": "chief", "text": "Nothing suspicious about that. But cross-check with the pizza orders. Is Kavya connected to SHADOW42?", "mood": "stern" }
+  ],
+  "storyBeat": "Kavya Rao — a premium library member from Bangalore — is also a regular at Pizza Palace. Her name doesn't appear on SHADOW42 orders... but someone from her IP did access the database.",
+  "nextCase": "w1c5"
+}

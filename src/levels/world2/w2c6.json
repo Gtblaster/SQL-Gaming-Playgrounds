@@ -1,0 +1,46 @@
+{
+  "id": "w2c6",
+  "world": 2,
+  "case": 6,
+  "title": "The DISTINCT Suspect",
+  "subtitle": "Find unique card types in the metro system — no repeats!",
+  "estimatedMinutes": 5,
+  "minigameType": "sql_interrogation",
+  "xpReward": 160,
+  "bonusXP": 40,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["distinct"],
+  "conceptSummary": "SELECT DISTINCT removes duplicate values and shows only unique ones in your result.",
+  "dataset": "metro",
+  "schema": {
+    "stations": ["station_id", "name", "line", "city", "daily_passengers"],
+    "trips": ["trip_id", "passenger_id", "from_station_id", "to_station_id", "trip_date", "trip_time", "fare", "card_type"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "The Metro Authority found that someone is duplicating QR code payments. We need to see all UNIQUE card types used.", "mood": "alert" },
+    { "character": "chief", "text": "SELECT DISTINCT. It removes all duplicate rows from your results. Simple but powerful.", "mood": "brief" }
+  ],
+  "teachMoment": {
+    "title": "DISTINCT: No Duplicates",
+    "body": "Without DISTINCT:\nSELECT card_type FROM trips\n→ metro_card, token, QR, metro_card, metro_card...\n\nWith DISTINCT:\nSELECT DISTINCT card_type FROM trips\n→ metro_card, token, QR (just 3 unique values)",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Find all DISTINCT card types used in the metro system. Also find all distinct from_station_id values.",
+    "startingQuery": "SELECT DISTINCT card_type FROM trips",
+    "solution": "SELECT DISTINCT card_type FROM trips",
+    "validationMode": "result_match",
+    "successCondition": { "rowCount": 3 }
+  },
+  "hints": [
+    { "level": 1, "text": "Add DISTINCT right after SELECT: SELECT DISTINCT card_type FROM trips", "xpCost": 0 },
+    { "level": 2, "text": "DISTINCT goes between SELECT and the column name.", "xpCost": 10 },
+    { "level": 3, "text": "SELECT DISTINCT card_type FROM trips", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "3 card types: metro_card, token, QR. But one passenger used all 3 types in a single day — that's suspicious!", "mood": "suspicious" },
+    { "character": "chief", "text": "Someone's testing all payment channels. Could be a system audit... or someone planning a large-scale fraud.", "mood": "worried" }
+  ],
+  "storyBeat": "Passenger 1001 used all 3 payment types in one day. Cross-referencing with the pizza orders: Passenger 1001's route goes through the station nearest to Pizza Palace. Coincidence? We think not.",
+  "nextCase": "w2c7"
+}

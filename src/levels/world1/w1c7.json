@@ -1,0 +1,49 @@
+{
+  "id": "w1c7",
+  "world": 1,
+  "case": 7,
+  "title": "The Chai Stall Caper",
+  "subtitle": "Databases vs spreadsheets — which is right for the job?",
+  "estimatedMinutes": 5,
+  "minigameType": "metric_match",
+  "xpReward": 110,
+  "bonusXP": 25,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["databases_vs_spreadsheets", "data_structures"],
+  "conceptSummary": "Spreadsheets are great for small data and quick math. Databases handle millions of rows, multiple tables, and complex queries.",
+  "dataset": "pizza_shop",
+  "schema": {},
+  "dialogue": [
+    { "character": "byte", "text": "Quick break! Our informant at the chai stall has a question. He has customer data — should he use Excel or a database?", "mood": "curious" },
+    { "character": "chief", "text": "Depends on the size and complexity. This is a FUNDAMENTAL question every data detective must know.", "mood": "serious" },
+    { "character": "player", "text": "Let me match each scenario to the right tool.", "mood": "ready" }
+  ],
+  "teachMoment": {
+    "title": "Spreadsheet vs Database",
+    "body": "Use a SPREADSHEET when:\n• Data fits in one sheet\n• You need quick calculations or charts\n• Team is small, non-technical\n\nUse a DATABASE when:\n• Data has multiple related tables\n• Millions of rows\n• Multiple users need to read/write at once\n• You need complex filtering and joining",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Match each scenario to the best tool: Spreadsheet or Database.",
+    "matchingPairs": [
+      { "scenario": "Tracking 50 students' grades for a semester", "answer": "Spreadsheet" },
+      { "scenario": "Managing orders for 10,000 customers across 5 cities", "answer": "Database" },
+      { "scenario": "Monthly budget for a family", "answer": "Spreadsheet" },
+      { "scenario": "Hospital records for 500 doctors and 50,000 patients", "answer": "Database" },
+      { "scenario": "Quick chart of this week's chai stall sales", "answer": "Spreadsheet" },
+      { "scenario": "E-commerce app with real-time inventory updates", "answer": "Database" }
+    ],
+    "validationMode": "match_all"
+  },
+  "hints": [
+    { "level": 1, "text": "If the data is small and lives in one place, a spreadsheet works. Big, complex, or shared? Database.", "xpCost": 0 },
+    { "level": 2, "text": "Think: would you want to scroll through a million rows in Excel? That's when a database wins.", "xpCost": 10 },
+    { "level": 3, "text": "Small/simple = Spreadsheet. Large/relational/multi-user = Database.", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Perfect score! The chai stall uncle is impressed. He's going to start learning SQL next week!", "mood": "happy" },
+    { "character": "chief", "text": "Speaking of databases — our informant just sent a tip. There's a hidden table in the pizza database.", "mood": "mysterious" }
+  ],
+  "storyBeat": "The informant reveals a secret: beyond the standard tables, there's a hidden `admin_logs` table tracking who modified the data. The SHADOW42 villain left digital footprints.",
+  "nextCase": "w1c8"
+}

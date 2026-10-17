@@ -1,0 +1,51 @@
+{
+  "id": "w1c1",
+  "world": 1,
+  "case": 1,
+  "title": "The Missing Menu",
+  "subtitle": "Someone stole Pizza Palace's order data. Or did they?",
+  "estimatedMinutes": 5,
+  "minigameType": "sql_interrogation",
+  "xpReward": 100,
+  "bonusXP": 25,
+  "badgeUnlock": "first_query",
+  "skillsIntroduced": ["select_star", "from", "tables"],
+  "conceptSummary": "SELECT * FROM table gets ALL rows and columns from a table — like opening the full file.",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"],
+    "customers": ["customer_id", "name", "city", "phone", "joined_date"],
+    "pizzas": ["pizza_id", "name", "category", "price", "size"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Rookie! First day on the job and we already have a case. Pizza Palace says their order data has gone MISSING.", "mood": "excited" },
+    { "character": "chief", "text": "Don't get too excited, Byte. Half the cases here are just people who forgot to look.", "mood": "grumpy" },
+    { "character": "byte", "text": "That's why we have our new rookie detective! The data IS in the database. You just need to find it.", "mood": "wink" },
+    { "character": "player", "text": "I'm on it. Let me look at the orders table.", "mood": "determined" }
+  ],
+  "teachMoment": {
+    "title": "Your First SQL Query",
+    "body": "SQL (Structured Query Language) is how you ask a database questions. The most basic question is: 'Show me everything.' In SQL, that looks like:\n\nSELECT * FROM orders\n\n• SELECT = what columns you want (* means ALL)\n• FROM = which table to look in",
+    "animated": true,
+    "diagram": "select_star"
+  },
+  "task": {
+    "instruction": "Look at the orders table. Write a SQL query to see ALL the orders. Use SELECT * FROM orders to fetch everything.",
+    "startingQuery": "-- Type your query here\nSELECT ",
+    "solution": "SELECT * FROM orders",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 15, "rowCountMin": 15 }
+  },
+  "hints": [
+    { "level": 1, "text": "The magic words are SELECT and FROM. What table do you want to look at?", "xpCost": 0 },
+    { "level": 2, "text": "To see all columns, use * (asterisk). So: SELECT * FROM ...", "xpCost": 10 },
+    { "level": 3, "text": "Full answer: SELECT * FROM orders", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "There they are! 20 orders, all present and accounted for. The data was never missing — nobody checked!", "mood": "happy" },
+    { "character": "chief", "text": "Classic. File this under: read the database before panicking.", "mood": "grumpy" },
+    { "character": "byte", "text": "Wait... look at those 'discount_code' values. Some say SHADOW42. That's... odd.", "mood": "suspicious" }
+  ],
+  "storyBeat": "Case closed: data was there all along. But a mysterious discount code — SHADOW42 — appears on some orders. Who put it there? The investigation begins...",
+  "nextCase": "w1c2"
+}

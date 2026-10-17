@@ -1,0 +1,45 @@
+{
+  "id": "w4c1",
+  "world": 4,
+  "case": 1,
+  "title": "Null and Void",
+  "subtitle": "Missing values in the hospital records could cost lives",
+  "estimatedMinutes": 8,
+  "minigameType": "sql_interrogation",
+  "xpReward": 220,
+  "bonusXP": 60,
+  "badgeUnlock": "cleanup_hero",
+  "skillsIntroduced": ["null_handling", "is_null", "coalesce"],
+  "conceptSummary": "NULL means 'no value'. Use IS NULL / IS NOT NULL to find them, and COALESCE to replace NULLs with a default.",
+  "dataset": "hospital",
+  "schema": {
+    "appointments": ["appt_id", "patient_id", "doctor_id", "appt_date", "appt_time", "status", "diagnosis", "fee_paid"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Welcome to the Cleanup Crew! This world is about messy data — NULLs, duplicates, typos. The hospital has appointments with missing diagnoses.", "mood": "concerned" },
+    { "character": "chief", "text": "NULL is dangerous in medical records. Find all appointments with no diagnosis recorded. That's negligence or tampering.", "mood": "serious" }
+  ],
+  "teachMoment": {
+    "title": "NULL: The Missing Value",
+    "body": "NULL means 'no data'. To find NULLs:\n\nSELECT * FROM appointments WHERE diagnosis IS NULL\n\nTo replace NULLs with a default:\nSELECT COALESCE(diagnosis, 'Not recorded') AS diagnosis\n\n⚠️ You cannot do: WHERE diagnosis = NULL (this doesn't work!)",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Find all appointments where the diagnosis is NULL (not recorded). Show appt_id, patient_id, and appt_date.",
+    "startingQuery": "SELECT appt_id, patient_id, appt_date\nFROM appointments\nWHERE diagnosis IS NULL",
+    "solution": "SELECT appt_id, patient_id, appt_date FROM appointments WHERE diagnosis IS NULL",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 1 }
+  },
+  "hints": [
+    { "level": 1, "text": "You can't use = NULL. Use IS NULL instead.", "xpCost": 0 },
+    { "level": 2, "text": "WHERE diagnosis IS NULL", "xpCost": 10 },
+    { "level": 3, "text": "SELECT appt_id, patient_id, appt_date FROM appointments WHERE diagnosis IS NULL", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Found them! Appointments with NULL diagnosis are the ones that were tampered with. The fee was also not recorded.", "mood": "vindicated" },
+    { "character": "chief", "text": "The pattern: SHADOW42 operatives booked appointments, modified records, then erased diagnoses to cover billing fraud.", "mood": "piecing_it_together" }
+  ],
+  "storyBeat": "NULL values as a weapon: the criminal network erased diagnoses to manipulate hospital billing. Every NULL is a clue. The data tells the truth, even in its silence.",
+  "nextCase": "w4c2"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "w2c2",
+  "world": 2,
+  "case": 2,
+  "title": "WHERE in the World?",
+  "subtitle": "Filter the e-commerce chaos to find what matters",
+  "estimatedMinutes": 7,
+  "minigameType": "sql_interrogation",
+  "xpReward": 160,
+  "bonusXP": 40,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["where_and_or", "comparison_operators"],
+  "conceptSummary": "Combine conditions with AND (both must be true) and OR (either can be true). Use NOT to exclude.",
+  "dataset": "ecommerce",
+  "schema": {
+    "products": ["product_id", "name", "category", "brand", "price", "stock", "rating"],
+    "customers": ["customer_id", "name", "email", "city", "state", "total_orders", "loyalty_tier"],
+    "transactions": ["txn_id", "customer_id", "product_id", "quantity", "unit_price", "total_amount", "txn_date", "payment_method", "discount_pct", "status"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "ShopIndia's fraud team flagged some suspicious UPI transactions over ₹10,000. AND they need to exclude refunded ones.", "mood": "focused" },
+    { "character": "chief", "text": "WHERE with AND. You can chain multiple conditions. Both conditions must be TRUE for a row to appear.", "mood": "teaching" }
+  ],
+  "teachMoment": {
+    "title": "AND, OR, NOT in WHERE",
+    "body": "Chain conditions:\n\nWHERE payment_method = 'UPI' AND total_amount > 10000\nWHERE city = 'Mumbai' OR city = 'Delhi'\nWHERE NOT status = 'refunded'\n\n• AND: BOTH must be true\n• OR: EITHER can be true\n• NOT: reverse the condition",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Find all completed transactions paid via UPI with total_amount greater than 5000. Show txn_id, total_amount, payment_method, and status.",
+    "startingQuery": "SELECT txn_id, total_amount, payment_method, status\nFROM transactions\nWHERE ",
+    "solution": "SELECT txn_id, total_amount, payment_method, status FROM transactions WHERE payment_method = 'UPI' AND total_amount > 5000 AND status = 'completed'",
+    "validationMode": "result_match",
+    "successCondition": { "rowCount": 2 }
+  },
+  "hints": [
+    { "level": 1, "text": "You need THREE conditions joined with AND. What are they?", "xpCost": 0 },
+    { "level": 2, "text": "WHERE payment_method = 'UPI' AND total_amount > 5000 AND status = 'completed'", "xpCost": 10 },
+    { "level": 3, "text": "Full query: SELECT txn_id, total_amount, payment_method, status FROM transactions WHERE payment_method = 'UPI' AND total_amount > 5000 AND status = 'completed'", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "2 suspicious high-value UPI transactions. Both paid by customer 201 — Aditya Shah from Mumbai!", "mood": "suspicious" },
+    { "character": "chief", "text": "Aditya Shah is a Gold loyalty member with 12 orders. High value, high frequency. Possible inside connection.", "mood": "stern" }
+  ],
+  "storyBeat": "Aditya Shah keeps appearing in the data. Gold loyalty member, frequent buyer, and now flagged transactions. Is he the mastermind, or just a patsy?",
+  "nextCase": "w2c3"
+}

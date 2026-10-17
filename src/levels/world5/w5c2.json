@@ -1,0 +1,50 @@
+{
+  "id": "w5c2",
+  "world": 5,
+  "case": 2,
+  "title": "Chart Chaos at City Hall",
+  "subtitle": "Pick the right chart to present the fraud report",
+  "estimatedMinutes": 7,
+  "minigameType": "chart_doctor",
+  "xpReward": 250,
+  "bonusXP": 80,
+  "badgeUnlock": "insight_guru",
+  "skillsIntroduced": ["chart_selection", "bar_vs_line_vs_pie", "data_storytelling"],
+  "conceptSummary": "Right chart for right data: Bar for comparisons, Line for trends over time, Pie for proportions (max 5 slices), Scatter for correlation.",
+  "dataset": "ecommerce",
+  "schema": {},
+  "dialogue": [
+    { "character": "byte", "text": "The City Hall commissioner wants a fraud report. We have 4 data stories to tell. Help pick the right chart for each!", "mood": "presenting" },
+    { "character": "chief", "text": "This is the art of data storytelling. The wrong chart makes people ignore the insight. The right one makes it undeniable.", "mood": "solemn" }
+  ],
+  "teachMoment": {
+    "title": "Choosing the Right Chart",
+    "body": "Quick guide:\n• Bar chart — compare categories (which city had most fraud?)\n• Line chart — trends over time (did fraud increase?)\n• Pie chart — proportions of a whole (% of fraud by payment type) — max 5-6 slices!\n• Scatter plot — relationship between two numbers (does spend correlate with fraud?)\n• Histogram — distribution (how are transaction amounts spread?)",
+    "animated": true
+  },
+  "task": {
+    "instruction": "For each scenario, pick the BEST chart type.",
+    "chartDoctor": {
+      "questions": [
+        { "scenario": "Show fraud cases per city (Mumbai: 45, Delhi: 32, Hyderabad: 28)", "options": ["Bar chart", "Line chart", "Pie chart", "Scatter plot"], "answer": 0, "explanation": "Bar chart is perfect for comparing values across categories (cities)." },
+        { "scenario": "Show how total fraud amount changed month-by-month over 2024", "options": ["Bar chart", "Line chart", "Pie chart", "Scatter plot"], "answer": 1, "explanation": "Line chart shows trends over time clearly." },
+        { "scenario": "Show the % breakdown of fraud by payment method (UPI 60%, Card 30%, Cash 10%)", "options": ["Bar chart", "Line chart", "Pie chart", "Scatter plot"], "answer": 2, "explanation": "Pie chart works for proportions with few categories (3 here — perfect)." },
+        { "scenario": "Show if higher total spending correlates with more orders per customer", "options": ["Bar chart", "Line chart", "Pie chart", "Scatter plot"], "answer": 3, "explanation": "Scatter plot shows the relationship (correlation) between two numeric variables." }
+      ]
+    },
+    "validationMode": "chart_quiz",
+    "successCondition": { "minCorrect": 3 }
+  },
+  "hints": [
+    { "level": 1, "text": "Think: am I comparing categories, showing a trend, showing proportions, or finding a relationship?", "xpCost": 0 },
+    { "level": 2, "text": "Time data → Line. Categories → Bar. Proportions → Pie. Two numbers → Scatter.", "xpCost": 10 },
+    { "level": 3, "text": "Answers: Bar, Line, Pie, Scatter", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "The report is PERFECT. The commissioner can see the entire fraud network at a glance. You're ready for the final boss!", "mood": "triumphant" },
+    { "character": "chief", "text": "The mastermind behind SHADOW42 is cornered. One final case — the boss case — to close this for good.", "mood": "resolute" }
+  ],
+  "storyBeat": "The fraud report is presented to the commissioner. With data, charts, and SQL queries as evidence, the case is airtight. The SHADOW42 network is exposed. The final boss case awaits — the ultimate test of everything you've learned.",
+  "nextCase": null,
+  "unlocksWorld": null
+}

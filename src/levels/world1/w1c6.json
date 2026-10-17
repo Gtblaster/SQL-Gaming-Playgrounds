@@ -1,0 +1,59 @@
+{
+  "id": "w1c6",
+  "world": 1,
+  "case": 6,
+  "title": "Top 5 Terror",
+  "subtitle": "Who are the TOP players — and are they for real?",
+  "estimatedMinutes": 5,
+  "minigameType": "query_builder",
+  "xpReward": 130,
+  "bonusXP": 30,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["limit"],
+  "conceptSummary": "LIMIT N shows only the first N rows — perfect for top-10 lists.",
+  "dataset": "cricket_league",
+  "schema": {
+    "players": ["player_id", "name", "team_id", "role", "country", "age"],
+    "match_stats": ["stat_id", "player_id", "match_id", "season", "runs_scored", "balls_faced", "wickets_taken", "overs_bowled", "catches"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "We need the Top 5 highest-scoring stats — just the top 5, not all 15.", "mood": "focused" },
+    { "character": "chief", "text": "LIMIT. Use LIMIT. It's literally called LIMIT because it limits the results.", "mood": "exasperated" },
+    { "character": "byte", "text": "The Chief has a way with words. Use LIMIT 5 at the end of your query!", "mood": "amused" }
+  ],
+  "teachMoment": {
+    "title": "LIMIT: Cut the List",
+    "body": "LIMIT cuts your results to a set number:\n\nSELECT * FROM match_stats ORDER BY runs_scored DESC LIMIT 5\n\nThis gets the TOP 5 scores. Always use ORDER BY with LIMIT so you get the right top/bottom items.",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Get the TOP 5 match stats by runs_scored (highest first). Show stat_id, player_id, and runs_scored.",
+    "startingQuery": "SELECT stat_id, player_id, runs_scored FROM match_stats ORDER BY runs_scored DESC LIMIT 5",
+    "solution": "SELECT stat_id, player_id, runs_scored FROM match_stats ORDER BY runs_scored DESC LIMIT 5",
+    "validationMode": "result_match",
+    "blocks": [
+      { "type": "keyword", "text": "SELECT", "color": "#6C63FF" },
+      { "type": "column", "text": "stat_id" },
+      { "type": "column", "text": "player_id" },
+      { "type": "column", "text": "runs_scored" },
+      { "type": "keyword", "text": "FROM", "color": "#FF6584" },
+      { "type": "table", "text": "match_stats" },
+      { "type": "keyword", "text": "ORDER BY", "color": "#43AA8B" },
+      { "type": "keyword", "text": "DESC", "color": "#43AA8B" },
+      { "type": "keyword", "text": "LIMIT", "color": "#F9A825" },
+      { "type": "number", "text": "5" }
+    ],
+    "successCondition": { "rowCount": 5, "orderedBy": "runs_scored", "direction": "DESC" }
+  },
+  "hints": [
+    { "level": 1, "text": "First sort by runs_scored DESC, then add LIMIT at the very end.", "xpCost": 0 },
+    { "level": 2, "text": "The pattern is: SELECT ... FROM ... ORDER BY runs_scored DESC LIMIT 5", "xpCost": 10 },
+    { "level": 3, "text": "Full: SELECT stat_id, player_id, runs_scored FROM match_stats ORDER BY runs_scored DESC LIMIT 5", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Top 5 scores confirmed. And player_id 1 appears THREE times in the top 5... all suspicious matches.", "mood": "suspicious" },
+    { "character": "chief", "text": "That's Arjun Patel from Mumbai Warriors. We need to dig deeper into his record. Next world: SQL Streets.", "mood": "stern" }
+  ],
+  "storyBeat": "Player 1, Arjun Patel, has suspiciously high stats in specific matches. Someone is inflating his numbers. To track them, we need more SQL power. Time to level up.",
+  "nextCase": "w1c7"
+}

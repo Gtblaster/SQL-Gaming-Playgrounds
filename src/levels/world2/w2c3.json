@@ -1,0 +1,55 @@
+{
+  "id": "w2c3",
+  "world": 2,
+  "case": 3,
+  "title": "Count & Conquer",
+  "subtitle": "ShopIndia needs numbers, not just names",
+  "estimatedMinutes": 7,
+  "minigameType": "query_builder",
+  "xpReward": 170,
+  "bonusXP": 45,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["count", "sum", "avg", "min", "max", "aggregate_functions"],
+  "conceptSummary": "Aggregate functions summarize many rows into one number: COUNT, SUM, AVG, MIN, MAX.",
+  "dataset": "ecommerce",
+  "schema": {
+    "transactions": ["txn_id", "customer_id", "product_id", "quantity", "unit_price", "total_amount", "txn_date", "payment_method", "discount_pct", "status"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "ShopIndia's CFO wants the total revenue and average transaction amount. One number each. No long lists!", "mood": "practical" },
+    { "character": "chief", "text": "Aggregate functions. COUNT rows, SUM values, AVG for average. These turn many rows into one number.", "mood": "instructing" }
+  ],
+  "teachMoment": {
+    "title": "Aggregate Functions",
+    "body": "Summarize data with:\n• COUNT(*) — how many rows?\n• SUM(column) — total of a number column\n• AVG(column) — average value\n• MIN(column) — smallest value\n• MAX(column) — largest value\n\nExample: SELECT COUNT(*), SUM(total_amount), AVG(total_amount) FROM transactions",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Find the total number of completed transactions, total revenue (SUM of total_amount), and average transaction amount for completed transactions.",
+    "startingQuery": "SELECT COUNT(*) AS total_transactions,\n       SUM(total_amount) AS total_revenue,\n       AVG(total_amount) AS avg_amount\nFROM transactions\nWHERE status = 'completed'",
+    "solution": "SELECT COUNT(*) AS total_transactions, SUM(total_amount) AS total_revenue, AVG(total_amount) AS avg_amount FROM transactions WHERE status = 'completed'",
+    "validationMode": "result_match",
+    "blocks": [
+      { "type": "keyword", "text": "SELECT" },
+      { "type": "function", "text": "COUNT(*)", "alias": "total_transactions" },
+      { "type": "function", "text": "SUM(total_amount)", "alias": "total_revenue" },
+      { "type": "function", "text": "AVG(total_amount)", "alias": "avg_amount" },
+      { "type": "keyword", "text": "FROM" },
+      { "type": "table", "text": "transactions" },
+      { "type": "keyword", "text": "WHERE" },
+      { "type": "condition", "text": "status = 'completed'" }
+    ],
+    "successCondition": { "rowCount": 1, "requiredColumns": ["total_transactions", "total_revenue", "avg_amount"] }
+  },
+  "hints": [
+    { "level": 1, "text": "You need COUNT(*) for count, SUM(total_amount) for revenue, AVG(total_amount) for average.", "xpCost": 0 },
+    { "level": 2, "text": "Add WHERE status = 'completed' to only count completed transactions.", "xpCost": 10 },
+    { "level": 3, "text": "SELECT COUNT(*) AS total_transactions, SUM(total_amount) AS total_revenue, AVG(total_amount) AS avg_amount FROM transactions WHERE status = 'completed'", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "22 completed transactions, total ₹1.5 lakhs, average ₹6,800. The CFO is happy!", "mood": "pleased" },
+    { "character": "chief", "text": "Now break it down by customer. Which customers are spending the most? GROUP BY is the next tool.", "mood": "ready" }
+  ],
+  "storyBeat": "Revenue numbers look normal on the surface. But broken down by customer, one person's spending pattern is wildly inconsistent with their reported income. We need GROUP BY.",
+  "nextCase": "w2c4"
+}

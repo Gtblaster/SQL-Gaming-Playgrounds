@@ -1,0 +1,49 @@
+{
+  "id": "w1c3",
+  "world": 1,
+  "case": 3,
+  "title": "Byte's Bad Feeling",
+  "subtitle": "The Library has a data type mystery",
+  "estimatedMinutes": 6,
+  "minigameType": "sql_interrogation",
+  "xpReward": 130,
+  "bonusXP": 30,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["data_types", "where", "comparison_operators"],
+  "conceptSummary": "Data types tell the database what KIND of data is in a column: TEXT, INTEGER, REAL (decimal), or DATE.",
+  "dataset": "library",
+  "schema": {
+    "books": ["book_id", "title", "author", "genre", "year_published", "total_copies", "available_copies"],
+    "members": ["member_id", "name", "email", "membership_type", "joined_date", "city"],
+    "loans": ["loan_id", "book_id", "member_id", "loan_date", "due_date", "return_date", "fine_amount"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "We've got a tip from the City Library. Their system is acting weird when they search for books.", "mood": "thoughtful" },
+    { "character": "chief", "text": "Probably a data type issue. Someone stored a year as TEXT instead of a number. Classic rookie mistake.", "mood": "grumpy" },
+    { "character": "byte", "text": "Which is why we have a rookie! Find all books published after 2000 — but first, understand the data types.", "mood": "wink" }
+  ],
+  "teachMoment": {
+    "title": "Data Types",
+    "body": "Every column has a type. Common ones:\n• TEXT — words and sentences (always use quotes: 'Hello')\n• INTEGER — whole numbers (42, 2024)\n• REAL — decimal numbers (4.5, 199.99)\n• DATE — stored as 'YYYY-MM-DD'\n\nTo filter, use WHERE:\nSELECT * FROM books WHERE year_published > 2000",
+    "animated": true,
+    "diagram": "data_types"
+  },
+  "task": {
+    "instruction": "Find all books published AFTER the year 2000. Use WHERE to filter by year_published.",
+    "startingQuery": "SELECT title, author, year_published\nFROM books\nWHERE -- add your condition here",
+    "solution": "SELECT title, author, year_published FROM books WHERE year_published > 2000",
+    "validationMode": "result_match",
+    "successCondition": { "rowCount": 7 }
+  },
+  "hints": [
+    { "level": 1, "text": "'After 2000' means year_published is greater than 2000. What symbol means 'greater than'?", "xpCost": 0 },
+    { "level": 2, "text": "Use > for 'greater than'. So: WHERE year_published > 2000", "xpCost": 10 },
+    { "level": 3, "text": "Full: SELECT title, author, year_published FROM books WHERE year_published > 2000", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "7 books published after 2000. The library's search is fixed!", "mood": "happy" },
+    { "character": "chief", "text": "One of the loaned books has an interesting title: 'Data Science for Beginners'. Check who borrowed it.", "mood": "suspicious" }
+  ],
+  "storyBeat": "A library member checked out a data science book and then vanished without returning it. The fine_amount is suspiciously zero. Someone tampered with the record.",
+  "nextCase": "w1c4"
+}

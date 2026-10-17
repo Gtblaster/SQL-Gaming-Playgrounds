@@ -1,0 +1,47 @@
+{
+  "id": "w2c1",
+  "world": 2,
+  "case": 1,
+  "title": "The SELECT Squeeze",
+  "subtitle": "Pizza Palace's billing system is pulling too much data",
+  "estimatedMinutes": 5,
+  "minigameType": "sql_interrogation",
+  "xpReward": 150,
+  "bonusXP": 40,
+  "badgeUnlock": "sql_rookie",
+  "skillsIntroduced": ["select_columns_advanced", "aliasing"],
+  "conceptSummary": "You can rename columns in results using AS: SELECT total_price AS amount gives the column a friendly name.",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"],
+    "customers": ["customer_id", "name", "city", "phone", "joined_date"],
+    "pizzas": ["pizza_id", "name", "category", "price", "size"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Welcome to SQL Streets! Here, every query is an investigation. The Pizza Palace billing system needs a clean receipt — just order ID and amount, with a friendly column name.", "mood": "excited" },
+    { "character": "chief", "text": "Use AS to rename columns. 'total_price AS Amount'. It's called an alias. Very detective-y.", "mood": "satisfied" }
+  ],
+  "teachMoment": {
+    "title": "Column Aliases with AS",
+    "body": "Rename columns in your output using AS:\n\nSELECT order_id, total_price AS amount FROM orders\n\nThe column in the result shows as 'amount' instead of 'total_price'. Great for clean reports!",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Select order_id (as 'Order Number') and total_price (as 'Amount Paid') from the orders table.",
+    "startingQuery": "SELECT order_id AS 'Order Number',\n       total_price AS 'Amount Paid'\nFROM orders",
+    "solution": "SELECT order_id AS 'Order Number', total_price AS 'Amount Paid' FROM orders",
+    "validationMode": "columns_match",
+    "successCondition": { "minRows": 15, "requiredColumns": ["Order Number", "Amount Paid"] }
+  },
+  "hints": [
+    { "level": 1, "text": "After each column name, add AS then the alias in quotes.", "xpCost": 0 },
+    { "level": 2, "text": "Pattern: SELECT col AS 'Alias' FROM table", "xpCost": 10 },
+    { "level": 3, "text": "SELECT order_id AS 'Order Number', total_price AS 'Amount Paid' FROM orders", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Perfect billing report! And look — order 1001 paid with SHADOW42 discount. The discount saves exactly 15%.", "mood": "suspicious" },
+    { "character": "chief", "text": "15% is the employee discount rate. Someone is using a staff discount code illegally. Investigate.", "mood": "angry" }
+  ],
+  "storyBeat": "SHADOW42 is an employee discount code. Someone either stole it or IS an employee. The pizza shop owner confirms only 3 employees have access. The net is tightening.",
+  "nextCase": "w2c2"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "w2c8",
+  "world": 2,
+  "case": 8,
+  "title": "Byte's SQL Speed Trial",
+  "subtitle": "10 fast SQL questions before the final showdown!",
+  "estimatedMinutes": 4,
+  "minigameType": "speed_round",
+  "xpReward": 200,
+  "bonusXP": 100,
+  "badgeUnlock": "speed_demon",
+  "skillsIntroduced": [],
+  "conceptSummary": "You've mastered: SELECT/AS, WHERE AND/OR, COUNT/SUM/AVG, GROUP BY, HAVING, DISTINCT, ORDER BY multi-column. One case left!",
+  "dataset": "pizza_shop",
+  "schema": {},
+  "dialogue": [
+    { "character": "byte", "text": "Before the boss case, PROVE your SQL skills. 10 questions, 15 seconds each. Let's go!", "mood": "competitive" },
+    { "character": "chief", "text": "No peeking at the schema. A real detective knows their tools cold.", "mood": "challenging" }
+  ],
+  "task": {
+    "instruction": "10 quick SQL questions. Pick the right answer before time runs out!",
+    "questions": [
+      { "q": "To rename a column in output, you use:", "options": ["RENAME", "AS", "CALL", "LABEL"], "answer": 1 },
+      { "q": "Which finds only UNIQUE values?", "options": ["UNIQUE", "ONLY", "DISTINCT", "FILTER"], "answer": 2 },
+      { "q": "COUNT(*) counts:", "options": ["Only non-NULL rows", "All rows including NULLs", "Only numeric columns", "Distinct values only"], "answer": 1 },
+      { "q": "WHERE vs HAVING: WHERE filters ___.", "options": ["Groups after GROUP BY", "Individual rows before grouping", "Aggregate functions", "The ORDER BY result"], "answer": 1 },
+      { "q": "SELECT city, COUNT(*) FROM customers GROUP BY city — what does this return?", "options": ["One row per customer", "One row per city with customer count", "All customers sorted by city", "Total customer count"], "answer": 1 },
+      { "q": "ORDER BY salary DESC, name ASC sorts by:", "options": ["Name first, then salary", "Salary highest first, then name A-Z for ties", "Salary lowest first", "Random order"], "answer": 1 },
+      { "q": "AVG(price) WHERE category = 'Electronics' gives:", "options": ["Sum of electronics prices", "Count of electronics", "Average price of electronics", "Min price"], "answer": 2 },
+      { "q": "Which query finds customers who spent MORE than 10000 total?", "options": ["WHERE SUM(amount) > 10000", "HAVING total > 10000 after GROUP BY customer_id", "WHERE amount > 10000 GROUP BY customer_id", "LIMIT 10000"], "answer": 1 },
+      { "q": "SELECT DISTINCT city FROM customers — if Mumbai appears 5 times, result shows:", "options": ["Mumbai 5 times", "Mumbai once", "Mumbai and count 5", "Error"], "answer": 1 },
+      { "q": "The correct ORDER of SQL clauses is:", "options": ["WHERE, FROM, SELECT, GROUP BY", "SELECT, FROM, WHERE, GROUP BY, HAVING, ORDER BY", "FROM, SELECT, WHERE, ORDER BY", "GROUP BY, WHERE, SELECT, FROM"], "answer": 1 }
+    ],
+    "timePerQuestion": 15,
+    "validationMode": "speed_round"
+  },
+  "hints": [],
+  "winDialogue": [
+    { "character": "byte", "text": "SQL Streets conquered! Time for the boss case. SHADOW42's mastermind is within reach!", "mood": "pumped" },
+    { "character": "chief", "text": "The final case is big. Use everything you've learned. No half measures.", "mood": "serious" }
+  ],
+  "storyBeat": "Your SQL skills are proven. The boss case awaits: a massive cross-database investigation to unmask the SHADOW42 mastermind once and for all.",
+  "nextCase": "w2c9"
+}

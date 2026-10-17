@@ -1,0 +1,60 @@
+{
+  "id": "w1c2",
+  "world": 1,
+  "case": 2,
+  "title": "Row Count Rumble",
+  "subtitle": "The manager wants specific columns. Lazy querying won't cut it.",
+  "estimatedMinutes": 5,
+  "minigameType": "query_builder",
+  "xpReward": 120,
+  "bonusXP": 30,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["select_columns"],
+  "conceptSummary": "SELECT column1, column2 picks ONLY the columns you need — like choosing which info to show.",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"],
+    "customers": ["customer_id", "name", "city", "phone", "joined_date"],
+    "pizzas": ["pizza_id", "name", "category", "price", "size"]
+  },
+  "dialogue": [
+    { "character": "chief", "text": "The manager at Pizza Palace wants a simple report. Just the order ID, date, and total price.", "mood": "grumpy" },
+    { "character": "byte", "text": "SELECT * would give them 8 columns. Way too much noise. We need to SELECT only the columns they care about.", "mood": "thoughtful" },
+    { "character": "player", "text": "Got it. I'll pick exactly the columns they need.", "mood": "confident" }
+  ],
+  "teachMoment": {
+    "title": "Picking Specific Columns",
+    "body": "Instead of *, you can name the exact columns:\n\nSELECT order_id, order_date, total_price FROM orders\n\nThis is like reading only the Name and Grade columns from a report card — ignoring everything else.",
+    "animated": true,
+    "diagram": "select_columns"
+  },
+  "task": {
+    "instruction": "Use the Query Builder blocks to SELECT only order_id, order_date, and total_price from the orders table.",
+    "startingQuery": "SELECT order_id, order_date, total_price FROM orders",
+    "solution": "SELECT order_id, order_date, total_price FROM orders",
+    "validationMode": "columns_match",
+    "blocks": [
+      { "type": "keyword", "text": "SELECT", "color": "#6C63FF" },
+      { "type": "column", "text": "order_id", "table": "orders" },
+      { "type": "column", "text": "order_date", "table": "orders" },
+      { "type": "column", "text": "total_price", "table": "orders" },
+      { "type": "column", "text": "quantity", "table": "orders" },
+      { "type": "column", "text": "status", "table": "orders" },
+      { "type": "keyword", "text": "FROM", "color": "#FF6584" },
+      { "type": "table", "text": "orders" },
+      { "type": "table", "text": "customers" }
+    ],
+    "successCondition": { "requiredColumns": ["order_id", "order_date", "total_price"], "maxColumns": 3 }
+  },
+  "hints": [
+    { "level": 1, "text": "Drag the SELECT block first, then pick only the 3 columns the manager asked for.", "xpCost": 0 },
+    { "level": 2, "text": "You need: SELECT [order_id] [order_date] [total_price] FROM [orders]", "xpCost": 10 },
+    { "level": 3, "text": "Full: SELECT order_id, order_date, total_price FROM orders", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "chief", "text": "That's the report I wanted. Clean. Concise. Finally.", "mood": "satisfied" },
+    { "character": "byte", "text": "And I noticed something — order 1001 and 1003 both have the SHADOW42 code. Both from the same customer!", "mood": "suspicious" }
+  ],
+  "storyBeat": "The mystery deepens: SHADOW42 keeps appearing on orders from Priya Sharma (customer ID 1). Is she the villain... or a victim?",
+  "nextCase": "w1c3"
+}

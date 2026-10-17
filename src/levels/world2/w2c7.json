@@ -1,0 +1,46 @@
+{
+  "id": "w2c7",
+  "world": 2,
+  "case": 7,
+  "title": "Order in the Court",
+  "subtitle": "The hospital needs a sorted patient report",
+  "estimatedMinutes": 6,
+  "minigameType": "sql_interrogation",
+  "xpReward": 170,
+  "bonusXP": 40,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["order_by_multiple", "nulls_in_order"],
+  "conceptSummary": "ORDER BY can sort by multiple columns: ORDER BY col1 DESC, col2 ASC — it sorts by col1 first, then by col2 for ties.",
+  "dataset": "hospital",
+  "schema": {
+    "doctors": ["doctor_id", "name", "specialization", "experience_years", "rating", "consultation_fee"],
+    "appointments": ["appt_id", "patient_id", "doctor_id", "appt_date", "appt_time", "status", "diagnosis", "fee_paid"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "City Hospital needs a report: all appointments sorted by date (newest first), then by fee (highest first) for same dates.", "mood": "professional" },
+    { "character": "chief", "text": "Multi-column ORDER BY. Comma-separate the columns. First column is primary sort, second breaks ties.", "mood": "clear" }
+  ],
+  "teachMoment": {
+    "title": "Sorting by Multiple Columns",
+    "body": "ORDER BY can take multiple columns:\n\nORDER BY appt_date DESC, fee_paid DESC\n\nThis sorts by date first (newest first). If two appointments share a date, the higher fee appears first.\n\nThink of it like sorting a deck: first by suit, then by number within each suit.",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Get all completed appointments. Sort by appt_date (newest first), then by fee_paid (highest first).",
+    "startingQuery": "SELECT appt_id, patient_id, doctor_id, appt_date, fee_paid\nFROM appointments\nWHERE status = 'completed'\nORDER BY ",
+    "solution": "SELECT appt_id, patient_id, doctor_id, appt_date, fee_paid FROM appointments WHERE status = 'completed' ORDER BY appt_date DESC, fee_paid DESC",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 10 }
+  },
+  "hints": [
+    { "level": 1, "text": "You need two columns in ORDER BY, separated by a comma.", "xpCost": 0 },
+    { "level": 2, "text": "ORDER BY appt_date DESC, fee_paid DESC", "xpCost": 10 },
+    { "level": 3, "text": "Full: SELECT appt_id, patient_id, doctor_id, appt_date, fee_paid FROM appointments WHERE status = 'completed' ORDER BY appt_date DESC, fee_paid DESC", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Report sorted! And patient 301 (Alok Tiwari) visited BOTH cardiology AND neurology on the same day. How?", "mood": "puzzled" },
+    { "character": "chief", "text": "Duplicate patient records. Or someone scheduled him in twice to inflate the billing. More data manipulation!", "mood": "grim" }
+  ],
+  "storyBeat": "The data manipulation ring is wider than we thought. It spans pizza orders, cricket stats, metro payments, AND hospital billing. SHADOW42 is not one person — it's an organized network.",
+  "nextCase": "w2c8"
+}

@@ -1,0 +1,57 @@
+{
+  "id": "w5c1",
+  "world": 5,
+  "case": 1,
+  "title": "Average Lies",
+  "subtitle": "When the mean misleads and the median reveals the truth",
+  "estimatedMinutes": 8,
+  "minigameType": "chart_doctor",
+  "xpReward": 240,
+  "bonusXP": 70,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["mean_vs_median", "outlier_effect", "descriptive_stats"],
+  "conceptSummary": "Mean (average) is pulled by outliers. Median (middle value) is more robust. Always check both!",
+  "dataset": "ecommerce",
+  "schema": {
+    "transactions": ["txn_id", "customer_id", "product_id", "quantity", "unit_price", "total_amount", "txn_date", "payment_method", "discount_pct", "status"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Welcome to Insight City! Here we turn data into understanding. The fraud report claims 'average transaction is ₹6,800'. But something feels off.", "mood": "skeptical" },
+    { "character": "chief", "text": "One massive transaction from the mastermind is skewing the average. Find the REAL typical transaction using median thinking.", "mood": "wise" }
+  ],
+  "teachMoment": {
+    "title": "Mean vs Median",
+    "body": "Example salaries: ₹20k, ₹22k, ₹25k, ₹28k, ₹200k\nMean: (20+22+25+28+200)/5 = ₹59k — misleading!\nMedian: ₹25k (middle value) — more realistic\n\nWhen data has outliers (extremely high or low values), the median is more honest.\n\nRule of thumb:\n• Symmetric data → Mean is fine\n• Skewed data / outliers → Use Median",
+    "animated": true
+  },
+  "task": {
+    "instruction": "Look at the bad chart shown. It shows the MEAN transaction amount. Choose the correct fix that better represents the 'typical' transaction.",
+    "chartDoctor": {
+      "badChart": {
+        "type": "bar",
+        "title": "Typical Transaction Amount",
+        "data": { "labels": ["Mean"], "values": [6821] },
+        "problem": "Mean is skewed by 2 large fraudulent transactions (28999, 22999). Most transactions are under 5000."
+      },
+      "options": [
+        { "label": "Show both Mean and Median", "correct": true, "explanation": "Showing both gives the full picture. Median (~3500) reveals the typical customer, while mean shows the overall total impact." },
+        { "label": "Use a bigger bar chart", "correct": false, "explanation": "Making the chart bigger doesn't fix the misleading metric." },
+        { "label": "Remove the outlier transactions from the data", "correct": false, "explanation": "Removing data hides important information. The outliers are the fraud we're investigating!" },
+        { "label": "Switch to a pie chart", "correct": false, "explanation": "A pie chart doesn't help here and would still use mean." }
+      ]
+    },
+    "validationMode": "multiple_choice",
+    "correctOption": 0
+  },
+  "hints": [
+    { "level": 1, "text": "The problem is the mean is pulled high by large outliers. What better represents 'typical'?", "xpCost": 0 },
+    { "level": 2, "text": "Median = the middle value when sorted. It's not affected by extremes. Show BOTH mean and median.", "xpCost": 10 },
+    { "level": 3, "text": "The correct fix is 'Show both Mean and Median' — it gives the full picture without hiding data.", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "The median transaction is ₹3,499 — totally normal. The mean of ₹6,821 was inflated by just 2 fraudulent mega-transactions.", "mood": "satisfied" },
+    { "character": "chief", "text": "Good. Now choose the right chart to show the fraud's geographic spread. A bar chart? Map? Scatter plot? Case 2 decides.", "mood": "awaiting" }
+  ],
+  "storyBeat": "Statistics don't lie, but they can mislead. The fraud's financial footprint was hidden behind a deceptive average. With the right metrics, the truth emerges. One final chart to make the case airtight.",
+  "nextCase": "w5c2"
+}

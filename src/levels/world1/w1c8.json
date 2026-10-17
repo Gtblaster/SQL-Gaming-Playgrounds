@@ -1,0 +1,47 @@
+{
+  "id": "w1c8",
+  "world": 1,
+  "case": 8,
+  "title": "Cold Case Review: Data Basics",
+  "subtitle": "Speed test your World 1 skills before moving on!",
+  "estimatedMinutes": 4,
+  "minigameType": "speed_round",
+  "xpReward": 200,
+  "bonusXP": 100,
+  "badgeUnlock": "data_reader",
+  "skillsIntroduced": [],
+  "conceptSummary": "You've mastered: tables, SELECT, FROM, WHERE, ORDER BY, LIMIT, and data types. World 2 awaits!",
+  "dataset": "pizza_shop",
+  "schema": {
+    "orders": ["order_id", "customer_id", "pizza_id", "quantity", "total_price", "order_date", "discount_code", "status"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "Before we head to SQL Streets, let's make sure your basics are locked in. Speed round time!", "mood": "excited" },
+    { "character": "chief", "text": "10 questions. Prove you're ready. No pressure. (There's pressure.)", "mood": "grumpy" }
+  ],
+  "task": {
+    "instruction": "Answer 10 quick questions about what you've learned. Pick the correct answer fast!",
+    "questions": [
+      { "q": "What does SELECT * mean?", "options": ["Select all columns", "Select the first column", "Delete everything", "Count all rows"], "answer": 0 },
+      { "q": "Which SQL keyword filters rows?", "options": ["ORDER BY", "LIMIT", "WHERE", "FROM"], "answer": 2 },
+      { "q": "To show only 5 results, you use:", "options": ["ONLY 5", "LIMIT 5", "MAX 5", "TOP 5"], "answer": 1 },
+      { "q": "'order_date' is what data type?", "options": ["INTEGER", "REAL", "DATE/TEXT", "BOOLEAN"], "answer": 2 },
+      { "q": "What does ORDER BY runs_scored DESC do?", "options": ["Sort by runs, lowest first", "Sort by runs, highest first", "Delete sorted rows", "Count runs"], "answer": 1 },
+      { "q": "To find orders with status = 'delivered', you write:", "options": ["WHERE status = delivered", "WHERE status = 'delivered'", "FILTER status 'delivered'", "HAVING status = 'delivered'"], "answer": 1 },
+      { "q": "A database is better than a spreadsheet when:", "options": ["You have 10 rows of data", "You need quick charts", "You have millions of rows and multiple tables", "You're doing a family budget"], "answer": 2 },
+      { "q": "Which of these is a TEXT data type value?", "options": ["42", "3.14", "'Mumbai'", "2024-01-01 (unquoted)"], "answer": 2 },
+      { "q": "SELECT order_id, total_price FROM orders — how many columns will show?", "options": ["All columns", "1", "2", "3"], "answer": 2 },
+      { "q": "What is a primary key?", "options": ["The first row in a table", "A unique identifier for each row", "The most important column", "A type of query"], "answer": 1 }
+    ],
+    "timePerQuestion": 15,
+    "validationMode": "speed_round"
+  },
+  "hints": [],
+  "winDialogue": [
+    { "character": "byte", "text": "You passed! World 1 badge unlocked. SQL Streets, here we come!", "mood": "celebrating" },
+    { "character": "chief", "text": "Don't celebrate yet. SQL Streets is where the real work begins. SHADOW42 won't catch itself.", "mood": "stern" }
+  ],
+  "storyBeat": "World 1 complete! You've proven your data reading skills. The SHADOW42 trail leads to SQL Streets — where complex queries will crack the case wide open.",
+  "nextCase": "w2c1",
+  "unlocksWorld": 2
+}

@@ -1,0 +1,48 @@
+{
+  "id": "w2c4",
+  "world": 2,
+  "case": 4,
+  "title": "Group Theory Heist",
+  "subtitle": "Which cricket team is manipulating their stats?",
+  "estimatedMinutes": 8,
+  "minigameType": "sql_interrogation",
+  "xpReward": 180,
+  "bonusXP": 50,
+  "badgeUnlock": null,
+  "skillsIntroduced": ["group_by"],
+  "conceptSummary": "GROUP BY groups rows with the same value, then aggregates each group. Perfect for 'total by category' questions.",
+  "dataset": "cricket_league",
+  "schema": {
+    "players": ["player_id", "name", "team_id", "role", "country", "age"],
+    "match_stats": ["stat_id", "player_id", "match_id", "season", "runs_scored", "balls_faced", "wickets_taken", "overs_bowled", "catches"],
+    "teams": ["team_id", "team_name", "city", "captain", "founded_year"]
+  },
+  "dialogue": [
+    { "character": "byte", "text": "The cricket board suspects match-fixing is inflating team scores. We need total runs PER TEAM.", "mood": "investigative" },
+    { "character": "chief", "text": "GROUP BY team_id with SUM(runs_scored). One row per team. That's the pattern.", "mood": "focused" }
+  ],
+  "teachMoment": {
+    "title": "GROUP BY: One Row Per Group",
+    "body": "GROUP BY groups identical values and lets you aggregate each group:\n\nSELECT team_id, SUM(runs_scored) AS total_runs\nFROM match_stats\nGROUP BY team_id\n\nResult: one row per team, showing their total runs. Without GROUP BY, SUM would give ONE total for ALL teams.",
+    "animated": true,
+    "diagram": "group_by"
+  },
+  "task": {
+    "instruction": "Find the total runs scored by each player (player_id). Show player_id and total_runs. Sort by total_runs descending.",
+    "startingQuery": "SELECT player_id, SUM(runs_scored) AS total_runs\nFROM match_stats\nGROUP BY \nORDER BY total_runs DESC",
+    "solution": "SELECT player_id, SUM(runs_scored) AS total_runs FROM match_stats GROUP BY player_id ORDER BY total_runs DESC",
+    "validationMode": "result_match",
+    "successCondition": { "minRows": 10, "orderedBy": "total_runs", "direction": "DESC" }
+  },
+  "hints": [
+    { "level": 1, "text": "GROUP BY goes after FROM (and WHERE if you have one). What column are you grouping by?", "xpCost": 0 },
+    { "level": 2, "text": "GROUP BY player_id — this groups all stat rows for the same player together.", "xpCost": 10 },
+    { "level": 3, "text": "SELECT player_id, SUM(runs_scored) AS total_runs FROM match_stats GROUP BY player_id ORDER BY total_runs DESC", "xpCost": 20 }
+  ],
+  "winDialogue": [
+    { "character": "byte", "text": "Player 1 has 202 total runs, far ahead of everyone else. That's a statistical anomaly!", "mood": "alarmed" },
+    { "character": "chief", "text": "We need to filter groups — find only players with suspiciously high runs. HAVING is the tool for that.", "mood": "decisive" }
+  ],
+  "storyBeat": "Player 1 (Arjun Patel) has double the runs of any other player. The data manipulation is clear. Now we need to isolate ALL anomalies — players with more than 100 total runs.",
+  "nextCase": "w2c5"
+}
